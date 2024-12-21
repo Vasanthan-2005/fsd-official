@@ -14,7 +14,7 @@ function App() {
 
   const [errors, seterrors] = useState({});
 
-  const [success, setsuccess] = useState(false);
+  const [success, setsuccess] = useState(null);
 
   const validate = (name, value) => {
     let error;
@@ -103,7 +103,7 @@ function App() {
         });
         const data = await response.json();
         if (response.ok) {
-          alert("User added");
+          console.log("Emp added");
           setsuccess(true);
           setformdata({
             f_name: "",
@@ -116,7 +116,7 @@ function App() {
             role: "",
           });
         } else {
-          alert("USER Already exist");
+          console.log("Emp exists")
           setsuccess(false);
         }
       } catch (err) {
@@ -133,7 +133,7 @@ function App() {
         <form onSubmit={handleregister}>
           <div className="row mb-3">
             <div className="col-md-6">
-              <label htmlFor="f_name">NAME</label>
+              <label htmlFor="f_name"><strong>NAME</strong></label>
               <input
                 name="f_name"
                 type="text"
@@ -150,7 +150,7 @@ function App() {
               )}
             </div>
             <div className="col-md-6">
-              <label htmlFor="l_name">LASTNAME</label>
+              <label htmlFor="l_name"><strong>LASTNAME</strong></label>
               <input
                 name="l_name"
                 type="text"
@@ -169,7 +169,7 @@ function App() {
           </div>
           <div className="row mb-3">
             <div className="col-md-6">
-              <label htmlFor="emp_id">Employee ID</label>
+              <label htmlFor="emp_id"><strong>Employee ID</strong></label>
               <input
                 name="emp_id"
                 type="text"
@@ -186,7 +186,7 @@ function App() {
               )}
             </div>
             <div className="col-md-6">
-              <label htmlFor="email">Email</label>
+              <label htmlFor="email"><strong>Email</strong></label>
               <input
                 name="email"
                 type="text"
@@ -205,7 +205,7 @@ function App() {
           </div>
           <div className="row mb-3">
             <div className="col-md-6">
-              <label htmlFor="phone">Phone</label>
+              <label htmlFor="phone"><strong>Phone</strong></label>
               <input
                 name="phone"
                 type="tel"
@@ -222,7 +222,7 @@ function App() {
               )}
             </div>
             <div className="col-md-6">
-              <label htmlFor="dept">Department</label>
+              <label htmlFor="dept"><strong>Department</strong></label>
               <select
                 name="dept"
                 className={`form-select ${errors.dept ? "is-invalid" : ""}`}
@@ -243,7 +243,7 @@ function App() {
           </div>
           <div className="row mb-3">
             <div className="col-md-6">
-              <label htmlFor="doj">Date Of Joining</label>
+              <label htmlFor="doj"><strong>Date Of Joining</strong></label>
               <input
                 name="doj"
                 type="date"
@@ -258,7 +258,7 @@ function App() {
               )}
             </div>
             <div className="col-md-6">
-              <label htmlFor="role">Role</label>
+              <label htmlFor="role"><strong>Role</strong></label>
               <input
                 name="role"
                 type="text"
@@ -281,6 +281,15 @@ function App() {
           >
             <strong>Register</strong>
           </button>
+          {success !== null && (
+            <div
+              className={`alert ${
+                success ? "alert-success" : "alert-danger"
+              } mt-3 text-center`}
+            >
+              {success ? "Employee added" : "Employee already Exists"}
+            </div>
+          )}
         </form>
       </div>
     </div>
